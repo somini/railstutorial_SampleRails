@@ -11,6 +11,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
       }
     end
     assert_template 'users/new'
+    # Should have some errors
+    assert_select 'div#error_explanation'
+    assert_select 'div.field_with_errors'
   end
 
   test "correct user signup" do
@@ -22,6 +25,11 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
       }
     end
     assert_template 'users/show'
+    # Should have flash sucess ...
+    assert_not flash.empty?
+    # ... and then goes away when you reload the page
+    get @request.original_url
+    assert flash.empty?
   end
 
 end
