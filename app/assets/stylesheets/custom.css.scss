@@ -4,6 +4,11 @@
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
+@mixin border-box {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 /* universal */
 
@@ -75,6 +80,40 @@ p {
   }
 }
 
+/* User Info */
+section.user_info {
+  border: 1px solid $gray;
+  text-align: center;
+  > * {
+    margin: 10px;
+  }
+}
+
+/* Forms */
+input, textarea, select, .uneditable-input {
+  border: 1px solid $gray-darker;
+  width: 100%;
+  margin-bottom: 2.5em;
+  @include border-box;
+}
+input {
+  height: auto !important;
+}
+  // Errors
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
 /* footer */
 
 footer {
@@ -99,4 +138,14 @@ footer {
       margin-left: 15px;
     }
   }
+}
+
+
+/* Debugging Only */
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 10em;
+  @include border-box;
 }
