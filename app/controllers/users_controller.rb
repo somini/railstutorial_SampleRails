@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save # Sucess!
+      log_in @user
       flash[:success] = "Welcome to our Twitter ripoff!"
       redirect_to @user
     else
