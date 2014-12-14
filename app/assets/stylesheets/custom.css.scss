@@ -99,6 +99,18 @@ input, textarea, select, .uneditable-input {
 input {
   height: auto !important;
 }
+.checkbox {
+  margin-top: -15px;
+  margin-bottom: 15px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+#session_remember_me {
+  width: auto;
+  margin-left: 0em;
+}
   // Errors
 #error_explanation {
   ul {
