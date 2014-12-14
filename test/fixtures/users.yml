@@ -1,1 +1,8 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+somini:
+  nick: somini
+  mail: stuff@domain.tld
+  password_digest: <%= User.pass_digest('swordfish') %>
+mhartl:
+  nick: mhartl
+  mail: example@railstutorial.org
+  password_digest: <%= User.pass_digest('swordfish') %>
