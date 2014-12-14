@@ -28,8 +28,13 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     # Should have flash sucess ...
     assert_not flash.empty?
     assert is_logged_in?
+    # After being logged in
+    ### No Log in option
+    assert_select "a[href=?]", accounts_login_path, count: 0
+    ### One logout and one for your profile
+    assert_select "a[href=?]", accounts_logout_path
     # ... and then goes away when you reload the page
-    get @request.original_url
+    reload_page
     assert flash.empty?
     assert is_logged_in?
   end

@@ -70,4 +70,8 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "b" * 9
     assert_not @user.valid?
   end
+
+  test "shouldn't authenticate users with nil digest" do
+    assert_not @user.authenticated?('')
+  end
 end

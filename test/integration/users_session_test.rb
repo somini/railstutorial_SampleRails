@@ -35,6 +35,7 @@ class UsersSessionTest < ActionDispatch::IntegrationTest
     delete accounts_logout_path
     assert_not is_logged_in?
     assert_redirected_to root_path
+    delete accounts_logout_path # Logout on logged out users is a no-op
     follow_redirect!
     # After being logged out
     ### Log in option

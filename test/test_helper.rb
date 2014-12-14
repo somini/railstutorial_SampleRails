@@ -12,6 +12,10 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include ApplicationHelper
 
+  def reload_page
+    get @request.original_url
+  end
+
   def is_logged_in?
     !session[:user_id].nil?
   end
