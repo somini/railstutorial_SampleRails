@@ -29,19 +29,21 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password,
     length: { minimum: 10 }
-  # This seems a freaking hack
-  def User.pass_digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
-  end
+
   def authenticated?(remember_token)
     return false if remember_digest.nil?
     return BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
-  # This is cool
-  def User.new_token
-    return SecureRandom.urlsafe_base64
+  class << self
+    # This seems a freaking hack
+    def pass_digest(string)
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                    BCrypt::Engine.cost
+      BCrypt::Password.create(string, cost: cost)
+    end
+    # This is cool
+    def new_token
+      return SecureRandom.urlsafe_base64
+    end
   end
-
 end
