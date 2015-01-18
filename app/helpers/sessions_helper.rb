@@ -39,4 +39,17 @@ module SessionsHelper
     end
   end
 
+  def current_user?(user)
+    user == current_user
+  end
+
+  #Friendly redirect (ugh!)
+  def fr_store # Only for GET
+    session[:forward_to] = request.url if request.get?
+  end
+  def fr_redir(default)
+    redirect_to(session[:forward_to] || default)
+    session.delete(:forward_to)
+  end
+
 end

@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       # Sucess!
       log_in @user
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-      redirect_to @user
+      fr_redir @user #Friendly Redirect: Go back to where it was
     else
       # Invalid login credentials
       flash.now[:danger] = "Wrong nick/password combination"

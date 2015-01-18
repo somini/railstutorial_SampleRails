@@ -28,7 +28,8 @@ class User < ActiveRecord::Base
   # Spooky stuff
   has_secure_password
   validates :password,
-    length: { minimum: 10 }
+    length: { minimum: 10 },
+    allow_blank: true # For changing other data and keep the same password
 
   def authenticated?(remember_token)
     return false if remember_digest.nil?
