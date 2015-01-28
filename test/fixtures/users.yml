@@ -6,3 +6,10 @@ mhartl:
   nick: mhartl
   mail: example@railstutorial.org
   password_digest: <%= User.pass_digest('swordfish') %>
+
+<% 99.times do |n| %>
+user_<%= n %>:
+  nick: <%= "User #{n}" %>
+  mail: <%= "mail#{n}@mail.tld" %>
+  password_digest: <%= User.pass_digest('swordfish') %>
+<% end %>
