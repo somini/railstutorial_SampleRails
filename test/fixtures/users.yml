@@ -2,6 +2,7 @@ somini:
   nick: somini
   mail: stuff@domain.tld
   password_digest: <%= User.pass_digest('swordfish') %>
+  admin: true
 mhartl:
   nick: mhartl
   mail: example@railstutorial.org
