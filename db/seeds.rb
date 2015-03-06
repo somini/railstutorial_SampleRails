@@ -10,11 +10,15 @@ User.create!(nick: "Example",
 	     mail: "user@domain.tld",
 	     password: password,
 	     password_confirmation: password,
-	     admin: true)
+	     admin: true,
+	     activated: true,
+	     activated_at: Time.zone.now)
 
 99.times do |n|
 	User.create!(nick: Faker::Name.name,
 		     mail: "user-#{n}@faker.fake",
 		     password: password,
-		     password_confirmation: password)
+		     password_confirmation: password,
+		     activated: true,
+		     activated_at: Time.zone.now)
 end

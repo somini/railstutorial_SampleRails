@@ -2,7 +2,9 @@ class User < ActiveRecord::Base
   SIMPLE_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   NORMAL_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
-  attr_accessor :remember_token
+  attr_accessor :remember_token, :activation_token
+  before_create :setup_activation
+  before_save :downcase_mail
 
   validates :nick,
     presence: true,
@@ -12,10 +14,6 @@ class User < ActiveRecord::Base
     presence: true,
     length: { maximum: 256 },
     format: { with: NORMAL_EMAIL_REGEX }
-
-  before_save {
-    self.mail.downcase!
-  }
 
   def remember_me
     self.remember_token = User.new_token
@@ -47,4 +45,14 @@ class User < ActiveRecord::Base
       return SecureRandom.urlsafe_base64
     end
   end
+
+  private
+    def downcase_mail
+      self.mail.downcase!
+    end
+
+    def setup_activation
+      self.activation_token = User.new_token
+      self.activation_digest = User.pass_digest(activation_token)
+    end
 end
